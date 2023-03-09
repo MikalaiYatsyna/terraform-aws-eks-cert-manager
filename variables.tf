@@ -29,11 +29,6 @@ variable "acme_server" {
   default     = "https://acme-staging-v02.api.letsencrypt.org/directory"
 }
 
-variable "hosted_zone_id" {
-  type        = string
-  description = "Hosted zone ID to use for challenges"
-}
-
 variable "oidc_provider_arn" {
   type        = string
   description = "OIDC provider arn"
