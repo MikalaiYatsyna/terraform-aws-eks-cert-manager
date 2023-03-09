@@ -18,17 +18,6 @@ variable "namespace" {
   description = "Namespace for Vault release"
 }
 
-variable "email" {
-  type        = string
-  description = "Email to be used in acme"
-}
-
-variable "acme_server" {
-  type        = string
-  description = "ACME server to user"
-  default     = "https://acme-staging-v02.api.letsencrypt.org/directory"
-}
-
 variable "oidc_provider_arn" {
   type        = string
   description = "OIDC provider arn"
