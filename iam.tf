@@ -1,65 +1,24 @@
-data "aws_iam_policy_document" "change_policy" {
-  statement {
-    sid       = "route53"
-    actions   = ["route53:GetChange"]
-    resources = ["arn:aws:route53:::change/*"]
-    effect    = "Allow"
-  }
-}
-
-data "aws_iam_policy_document" "update_zone_policy" {
-  statement {
-    sid = "route53"
-    actions = [
-      "route53:ChangeResourceRecordSets",
-      "route53:ListResourceRecordSets"
-    ]
-    resources = ["arn:aws:route53:::hostedzone/*"]
-    effect    = "Allow"
-  }
-}
-
-data "aws_iam_policy_document" "list_zones" {
-  statement {
-    sid       = "route53"
-    actions   = ["route53:ListHostedZonesByName"]
-    resources = ["*"]
-    effect    = "Allow"
-  }
-}
-
-resource "aws_iam_policy" "change" {
-  policy = data.aws_iam_policy_document.change_policy.json
-}
-resource "aws_iam_policy" "list_zone" {
-  policy = data.aws_iam_policy_document.list_zones.json
-}
-resource "aws_iam_policy" "update_zone" {
-  policy = data.aws_iam_policy_document.update_zone_policy.json
+locals {
+  service_account_name = "cert-manager-sa"
 }
 
 module "cert_manager_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-
-  role_name = "${var.stack}-cert-manager-role"
-  role_policy_arns = {
-    Change     = aws_iam_policy.change.arn
-    UpdateZone = aws_iam_policy.update_zone.arn
-    ListZones  = aws_iam_policy.list_zone.arn
-  }
-
-  oidc_providers = {
+  source                        = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  role_name                     = "${var.stack}-cert-manager-role"
+  attach_cert_manager_policy    = true
+  cert_manager_hosted_zone_arns = [data.aws_route53_zone.zone.arn]
+  oidc_providers                = {
     main = {
       provider_arn               = var.oidc_provider_arn
-      namespace_service_accounts = ["${var.namespace}:${var.stack}-cert-manager-sa"]
+      namespace_service_accounts = ["${var.namespace}:${local.service_account_name}"]
     }
   }
 }
 
-resource "kubernetes_service_account" "secret-manager-sa" {
+resource "kubernetes_service_account" "cert-manager-sa" {
   metadata {
-    name      = "${var.stack}-cert-manager-sa"
-    namespace = var.namespace
+    name        = local.service_account_name
+    namespace   = var.namespace
     annotations = {
       "eks.amazonaws.com/role-arn"               = module.cert_manager_role.iam_role_arn
       "eks.amazonaws.com/sts-regional-endpoints" = "true"
@@ -75,10 +34,10 @@ resource "kubernetes_service_account" "secret-manager-sa" {
 resource "kubernetes_secret" "sa-token" {
   type = "kubernetes.io/service-account-token"
   metadata {
-    name      = "${kubernetes_service_account.secret-manager-sa.metadata[0].name}-secret"
-    namespace = var.namespace
+    name        = tolist(kubernetes_service_account.cert-manager-sa.secret)[0].name
+    namespace   = var.namespace
     annotations = {
-      "kubernetes.io/service-account.name" = kubernetes_service_account.secret-manager-sa.metadata[0].name
+      "kubernetes.io/service-account.name" = kubernetes_service_account.cert-manager-sa.metadata[0].name
     }
   }
 }
