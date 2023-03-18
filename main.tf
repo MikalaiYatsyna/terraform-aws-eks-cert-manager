@@ -9,7 +9,7 @@ resource "helm_release" "cert_manager" {
       installCRDs = true
       serviceAccount = {
         create = false
-        name   = kubernetes_service_account.secret-manager-sa.metadata[0].name
+        name   = kubernetes_service_account.cert-manager-sa.metadata[0].name
       }
     })
   ]
