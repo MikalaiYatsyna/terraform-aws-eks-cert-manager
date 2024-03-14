@@ -9,7 +9,7 @@ Terraform module to provision cert-manager on EKS cluster
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.7.5 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.67.0 |
 | <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.12.1 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.18.1 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.27.0 |
 
 ## Providers
 
@@ -17,7 +17,7 @@ Terraform module to provision cert-manager on EKS cluster
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 4.67.0 |
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.12.1 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.18.1 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.27.0 |
 
 ## Modules
 
@@ -30,8 +30,8 @@ Terraform module to provision cert-manager on EKS cluster
 | Name | Type |
 |------|------|
 | [helm_release.cert_manager](https://registry.terraform.io/providers/hashicorp/helm/2.12.1/docs/resources/release) | resource |
-| [kubernetes_secret.sa-token](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/secret) | resource |
-| [kubernetes_service_account.cert-manager-sa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.18.1/docs/resources/service_account) | resource |
+| [kubernetes_secret.sa-token](https://registry.terraform.io/providers/hashicorp/kubernetes/2.27.0/docs/resources/secret) | resource |
+| [kubernetes_service_account.cert-manager-sa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.27.0/docs/resources/service_account) | resource |
 | [aws_eks_cluster.eks_cluster](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/data-sources/eks_cluster) | data source |
 | [aws_eks_cluster_auth.eks_cluster_auth](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_route53_zone.zone](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/data-sources/route53_zone) | data source |
