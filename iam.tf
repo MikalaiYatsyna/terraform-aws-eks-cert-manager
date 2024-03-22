@@ -1,7 +1,7 @@
 resource "kubernetes_service_account" "cert-manager-sa" {
   metadata {
-    name      = var.service_account_name
-    namespace = var.namespace
+    name        = var.service_account_name
+    namespace   = var.namespace
     annotations = var.service_account_annotations
   }
   secret {

@@ -31,11 +31,11 @@ variable "k8s_exec_command" {
 }
 
 variable "service_account_name" {
-  type = string
+  type        = string
   description = "Kubernetes service account name, to be created and used for cert-manager."
 }
 
 variable "service_account_annotations" {
-  type = map(string)
+  type        = map(string)
   description = "Annotations to be applied to service account. e.g 'eks.amazonaws.com/sts-regional-endpoints' = 'true'."
 }
