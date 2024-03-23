@@ -15,16 +15,12 @@ sections:
 
 content: |-
   {{ .Header }}  
+  {{ .Requirements }}
   {{ .Providers }}
-  {{ .Outputs }}
+  {{ .Modules  }}
+  {{ .Resources }}
   {{ .Inputs }}
-   
-  {{ if .Module.Resources }}
-  ## Resources
-  {{ range .Module.Resources }}
-  - {{ .GetMode }}.{{ .Spec }} ({{ .Position.Filename }}#{{ .Position.Line }})
-  {{- end }}
-  {{- end }}
+  {{ .Outputs }}
 
 output:
   file: README.md
