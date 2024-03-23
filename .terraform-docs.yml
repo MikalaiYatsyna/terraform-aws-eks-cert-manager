@@ -14,16 +14,7 @@ sections:
   show: []
 
 content: |-
-  {{ .Header }}
-  
-  ## Prerequisites
-  
-  The following IAM policy needs to be attached to the role that is assumed during the creation of module resources:
-  
-  ```json
-  {{ include "iam/terraform-state-policy.json" }}
-  ```
-  
+  {{ .Header }}  
   {{ .Providers }}
   {{ .Outputs }}
   {{ .Inputs }}
