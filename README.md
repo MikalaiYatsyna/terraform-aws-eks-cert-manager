@@ -2,13 +2,6 @@
 Terraform module to provision cert-manager on EKS cluster
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.7.5 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.12.1 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.27.0 |
 
 ## Providers
 
@@ -16,19 +9,9 @@ Terraform module to provision cert-manager on EKS cluster
 |------|---------|
 | <a name="provider_helm"></a> [helm](#provider\_helm) | 2.12.1 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.27.0 |
+## Outputs
 
-## Modules
-
-No modules.
-
-## Resources
-
-| Name | Type |
-|------|------|
-| [helm_release.cert_manager](https://registry.terraform.io/providers/hashicorp/helm/2.12.1/docs/resources/release) | resource |
-| [kubernetes_secret.sa-token](https://registry.terraform.io/providers/hashicorp/kubernetes/2.27.0/docs/resources/secret) | resource |
-| [kubernetes_service_account.cert-manager-sa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.27.0/docs/resources/service_account) | resource |
-
+No outputs.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -42,7 +25,10 @@ No modules.
 | <a name="input_service_account_name"></a> [service\_account\_name](#input\_service\_account\_name) | Kubernetes service account name, to be created and used for cert-manager. | `string` | n/a | yes |
 | <a name="input_stack"></a> [stack](#input\_stack) | Stack name | `string` | n/a | yes |
 
-## Outputs
 
-No outputs.
+## Resources
+
+- resource.helm_release.cert_manager (main.tf#1)
+- resource.kubernetes_secret.sa-token (iam.tf#14)
+- resource.kubernetes_service_account.cert-manager-sa (iam.tf#1)
 <!-- END_TF_DOCS -->
