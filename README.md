@@ -2,19 +2,19 @@
 Terraform module to provision cert-manager on EKS cluster
 
 <!-- BEGIN_TF_DOCS -->
-
+  
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.7.5 |
-| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.12.1 |
+| <a name="requirement_helm"></a> [helm](#requirement\_helm) | 2.13.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | 2.27.0 |
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.12.1 |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.13.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | 2.27.0 |
 ## Modules
 
@@ -23,7 +23,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [helm_release.cert_manager](https://registry.terraform.io/providers/hashicorp/helm/2.12.1/docs/resources/release) | resource |
+| [helm_release.cert_manager](https://registry.terraform.io/providers/hashicorp/helm/2.13.0/docs/resources/release) | resource |
 | [kubernetes_secret.sa-token](https://registry.terraform.io/providers/hashicorp/kubernetes/2.27.0/docs/resources/secret) | resource |
 | [kubernetes_service_account.cert-manager-sa](https://registry.terraform.io/providers/hashicorp/kubernetes/2.27.0/docs/resources/service_account) | resource |
 ## Inputs
